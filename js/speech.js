@@ -80,6 +80,7 @@ const Speech = {
     },
     recognize: () => {
         document.querySelector('.speech-btn').addEventListener('click', function(){
+            Speech.recognizer.stop();
             try{
                 Speech.recognizer.start();
             }
