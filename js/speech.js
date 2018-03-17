@@ -9,6 +9,29 @@ const Speech = {
         Speech.talk('Olá, bem vindo ao sistema de comércio por voz! Clique em começar.');
         Speech.setButton(Speech.numScreen);
     },
+    config: () => {
+        window.SpeechRecognition = window.SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition || null;
+        window.SpeechSynthesisUtterance = window.SpeechSynthesisUtterance || null;
+        if (window.SpeechRecognition === null || window.SpeechSynthesisUtterance === null) {
+            document.querySelector("#unsupported").classList.remove('hidden');
+            document.querySelector("#all").classList.add('hidden');
+        }
+        else {
+            Speech.recognizer = new window.SpeechRecognition();
+            Speech.recognizer.continuous = false;
+            Speech.recognizer.lang = 'pt-BR';
+
+            Speech.voices = window.speechSynthesis.getVoices();
+            Speech.msg = new SpeechSynthesisUtterance();
+            Speech.msg.voice = Speech.voices[10];
+            Speech.msg.voiceURI = 'native';
+            Speech.msg.volume = 1;
+            Speech.msg.rate = 1;
+            Speech.msg.pitch = 1;
+            Speech.msg.text = text;
+            Speech.msg.lang = 'pt-BR';
+        }
+    },
     setButton: (screen) => {
         var old_element = document.getElementById("btn");
         var new_element = old_element.cloneNode(true);
@@ -48,29 +71,6 @@ const Speech = {
                     Speech.recognize();
                 });
             break;
-        }
-    },
-    config: () => {
-        window.SpeechRecognition = window.SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition || null;
-        window.SpeechSynthesisUtterance = window.SpeechSynthesisUtterance || null;
-        if (window.SpeechRecognition === null || window.SpeechSynthesisUtterance === null) {
-            document.querySelector("#unsupported").classList.remove('hidden');
-            document.querySelector("#all").classList.add('hidden');
-        }
-        else{
-            Speech.recognizer            = new window.SpeechRecognition();
-            Speech.recognizer.continuous = false;
-            Speech.recognizer.lang       = 'pt-BR';
-
-            Speech.voices                = window.speechSynthesis.getVoices();
-            Speech.msg                   = new SpeechSynthesisUtterance();
-            Speech.msg.voice             = Speech.voices[10];
-            Speech.msg.voiceURI          = 'native';
-            Speech.msg.volume            = 1;
-            Speech.msg.rate              = 1;
-            Speech.msg.pitch             = 1;
-            Speech.msg.text              = text;
-            Speech.msg.lang              = 'pt-BR';
         }
     },
     talk: (text) => {
