@@ -1,0 +1,16 @@
+{
+  "name": "dctb-speech-commerce",
+  "version": "0.0.1",
+  "private": true,
+  "description": "Repositório para exemplificar a utilização do comando Speech em um ecommerce.",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Diogo Cezar <diogo@diogocezar.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "browser-sync": "^2.23.6",
+    "gulp": "^3.9.1"
+  }
+}
